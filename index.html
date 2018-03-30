@@ -1,14 +1,49 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Weather App</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <script src="main.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+    <script type="text/javascript" src='http://code.jquery.com/jquery-1.10.2.min.js'></script> 
+
+    <script>
+    $(document).ready(function() {
+    $('form').submit(function() {
+        var key = 'da34d302918c1987c6643550e7a4088a';
+        var appid = '&&appid='
+        var location = $('#searchBar').val();
+            console.log(location)
+        var url = 'http://api.openweathermap.org/data/2.5/weather?q=' + location + appid + key; 
+        console.log(url)
+        $.get(url, function(res) {
+        console.log(res.name)
+        var html_str = "";
+            html_str += "<h1>" + res.name + "</h1>";
+            html_str += "<p>" + res.description + "</p>" ///unidentified need to fidure out path for weather description
+        
+        var cels = res.main.temp;
+         console.log(cels)
+        var far = (cels*1.8)+32;
+        console.log(far)
+
+           
+
+
+
+        $(".weather").html(html_str);
+        }, 'json');
+        // don't forget to return false so the page doesn't refresh
+        return false;
+    });
+});
+
+    </script>
 </head>
 <body>
-    
+    <form action="">
+        <input type="text" id="searchBar">
+        <input class="input" type="submit" value="Search Weather">
+        <div class="weather"></div>
+    </form> 
 </body>
 </html>
