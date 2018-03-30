@@ -17,14 +17,18 @@
         console.log(url)
         $.get(url, function(res) {
         console.log(res.name)
+
+        var kelvin = res.main.temp;
+         console.log(kelvin)
+        var far = Math.floor(1.8*(kelvin - 273)+32);
+        console.log(far)
+
         var html_str = "";
             html_str += "<h1>" + res.name + "</h1>";
+            html_str += "<p>Temperature: " + far + "</p>" ///unidentified need to fidure out path for weather description
             html_str += "<p>" + res.description + "</p>" ///unidentified need to fidure out path for weather description
         
-        var cels = res.main.temp;
-         console.log(cels)
-        var far = (cels*1.8)+32;
-        console.log(far)
+        
 
            
 
